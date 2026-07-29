@@ -1,5 +1,9 @@
 # ImageUltra · 单机版 AI 生图工作台
 
+[![下载最新版](https://img.shields.io/github/v/release/badaozhai/imageUltra?label=%E4%B8%8B%E8%BD%BD%E6%9C%80%E6%96%B0%E7%89%88&style=for-the-badge)](https://github.com/badaozhai/imageUltra/releases/latest)
+
+📦 **[点此下载 Windows exe / macOS dmg →](https://github.com/badaozhai/imageUltra/releases/latest)**
+
 **纯单机 AI 生图桌面应用**（Tauri 2 + React）：营销海报、实物图海报、AI 修图、证件照、角色三视图、定妆照、道具库，一个安装包全搞定。
 没有后端、没有账号、没有数据库服务——除了调用你配置的 OpenAI 兼容生图接口之外，一切都在本机完成。
 
