@@ -17,23 +17,17 @@
 | --- | --- |
 | ![果饮招商海报](docs/examples/poster-juice.jpg) | ![拖鞋产品海报](docs/examples/poster-slippers.jpg) |
 
-**三视图 + 武器**（ImageUltra 实测生成：正/侧/背同一角色，手中金箍棒按道具库参考图锁定形制）：
-
-![孙悟空三视图·带金箍棒](docs/examples/three-view-sunwukong-app.jpg)
-
-**道具库单体参考图**（ImageUltra 实测生成，`道具单体参考图` 模板 + 形制描述）：
-
-<img src="docs/examples/prop-jingubang-app.jpg" alt="如意金箍棒道具图" width="360">
-
-**更多同管线示例**（1961 美影厂工笔重彩画风）：
+**三视图**（正/侧/背同一角色、装束配件一件不漏，1961 美影厂工笔重彩画风）：
 
 | 三视图 · 孙悟空 | 三视图 · 玉帝 |
 | --- | --- |
 | ![孙悟空三视图](docs/examples/three-view-sunwukong.jpg) | ![玉帝三视图](docs/examples/three-view-yudi.jpg) |
 
+**场景设定图 与 道具库单体参考图**：
+
 ![蟠桃园场景设定图](docs/examples/scene-pantaoyuan.jpg)
 
-<img src="docs/examples/prop-jingubang.jpg" alt="金箍棒道具参考图（工笔重彩版）" width="360">
+<img src="docs/examples/prop-jingubang.jpg" alt="金箍棒道具参考图" width="360">
 
 ## 功能
 
