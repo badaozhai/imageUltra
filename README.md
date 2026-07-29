@@ -5,6 +5,18 @@
 
 ## 效果展示
 
+**营销海报**（ImageUltra 实测生成：无实物图模式，行业/场景/风格/文案表单直接出成品，中文排版零错字）：
+
+| 开业海报 · 小红书清新 | 招商海报 · 黑金商务 |
+| --- | --- |
+| ![茶饮开业海报](docs/examples/poster-tea-opening-app.jpg) | ![AI软件招商海报](docs/examples/poster-agent-app.jpg) |
+
+**更多海报示例**（同管线：左=无实物图，右=有实物图·产品照出海报）：
+
+| 果饮招商 · 高科技感 | 产品海报 · 简约高级 |
+| --- | --- |
+| ![果饮招商海报](docs/examples/poster-juice.jpg) | ![拖鞋产品海报](docs/examples/poster-slippers.jpg) |
+
 **三视图 + 武器**（ImageUltra 实测生成：正/侧/背同一角色，手中金箍棒按道具库参考图锁定形制）：
 
 ![孙悟空三视图·带金箍棒](docs/examples/three-view-sunwukong-app.jpg)
@@ -49,7 +61,7 @@
 
 首次启动自动弹出设置窗，所有配置保存在本机：
 
-- **接口地址**：默认 `https://claudegpt.com/v1`（可换任何 OpenAI Images 兼容网关，带不带 `/v1` 均可）
+- **接口地址**：默认 `https://claudegpt.org/v1`（可换任何 OpenAI Images 兼容网关，带不带 `/v1` 均可）
 - **API Key**：必填，仅存储在本机
 - **模型**：文生图 / 图片编辑 / 海报策划 / 识图视觉，默认 `gpt-image-2` × 3 + `gpt-5.5`
 - **失败重试次数**：0~3

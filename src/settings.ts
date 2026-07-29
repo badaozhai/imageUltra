@@ -17,7 +17,7 @@ export type AppSettings = {
 };
 
 export const DEFAULT_SETTINGS: AppSettings = {
-  baseUrl: 'https://claudegpt.com/v1',
+  baseUrl: 'https://claudegpt.org/v1',
   apiKey: '',
   imageModel: 'gpt-image-2',
   editModel: 'gpt-image-2',

@@ -13,7 +13,7 @@ export default defineConfig({
     // 设置页把接口地址填 http://127.0.0.1:5175/dev-proxy 即可在浏览器里直连测试
     proxy: {
       '/dev-proxy': {
-        target: process.env.IMAGEULTRA_DEV_PROXY_TARGET || 'https://claudegpt.com',
+        target: process.env.IMAGEULTRA_DEV_PROXY_TARGET || 'https://claudegpt.org',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/dev-proxy/, '')
       }
