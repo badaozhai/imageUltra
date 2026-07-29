@@ -1,7 +1,7 @@
 # ImageUltra · 单机版 AI 生图工作台
 
-从 [imagepro](https://github.com/badaozhai/imagepro) 移植生图能力、从 fenjingtest 移植 三视图 / 定妆照 / 道具库 的**纯单机桌面应用**（Tauri 2 + React）。
-没有后端、没有账号、没有数据库服务——除了调用配置的 OpenAI 兼容生图接口之外，一切都在本机完成。
+**纯单机 AI 生图桌面应用**（Tauri 2 + React）：营销海报、实物图海报、AI 修图、证件照、角色三视图、定妆照、道具库，一个安装包全搞定。
+没有后端、没有账号、没有数据库服务——除了调用你配置的 OpenAI 兼容生图接口之外，一切都在本机完成。
 
 ## 效果展示
 
@@ -110,14 +110,15 @@ git tag v0.1.0 && git push origin v0.1.0
 
 ## 技术说明
 
-- 生图引擎为 imagepro 服务端 `generation_service.py` / `content.py` 的 TypeScript 移植：
-  同样的三条上游路线选择、同样的提示词模板、同样的尺寸/质量映射（最长边 1024 对齐 16 倍数、
-  edits 端点 1024/1536 三档、1k/2k/4k → low/medium/high）、同样的证件照居中偏上（0.42）裁切。
-- 三视图/定妆照/道具库移植自 fenjingtest 的参考图库与方案B资产库口径：
-  角色三视设定图（正/侧/背同一人、配件一件不漏）、角色正面立绘资产、道具单体参考图
-  （owner/label/usage 防歧义）、挂参考图锁形象（`/images/edits` + `input_fidelity=high`）。
+- 三条上游路线自动选择：有参考图 → `/v1/images/edits`（`input_fidelity=high` 高保真原图）；
+  gpt-image 系列文生图 → `/v1/images/generations`；gpt-5.x 文生图 → `/v1/responses`（流式）。
+- 尺寸/质量映射：文生图按画布比例换算并对齐 16 的倍数；edits 端点按比例就近映射
+  1024×1536 / 1536×1024 / 1024×1024 三档；1K/2K/4K → low/medium/high。
+- 证件照本地 canvas 后处理：覆盖裁切 + 纵向重心 0.42（保住头顶留白），精确到标准像素。
+- 三视图/定妆照可挂 角色参考图（锁长相装束）与 道具参考图（锁武器形制）；
+  道具带 归属/类型/用法 字段防歧义（如"筋斗云踩在脚下、不是拿在手里"）。
 - 桌面端 HTTP 走 `tauri-plugin-http`（Rust reqwest），不受 webview CORS 限制。
-- 行业级联与全行业文案模板库从 imagepro 客户端原样复用。
+- 内置多级行业体系与全行业营销文案模板库，完全离线可用。
 
 ## 联系方式
 
