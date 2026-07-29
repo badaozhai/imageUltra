@@ -74,7 +74,7 @@ npm run dev          # 纯浏览器开发（接口若无 CORS 会受限，建议
 npm run tauri:dev    # 桌面窗口开发（HTTP 走 Rust 侧，无 CORS 限制）
 ```
 
-需要 Node 18+ 与 Rust 稳定版工具链（https://rustup.rs）。
+需要 Node 18+ 与 Rust 稳定版工具链（安装见 [rustup.rs](https://rustup.rs/)）。
 
 ## 打包
 
