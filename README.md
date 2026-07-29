@@ -4,7 +4,7 @@
 
 📦 **[点此下载 Windows exe / macOS dmg →](https://github.com/badaozhai/imageUltra/releases/latest)**
 
-**纯单机 AI 生图桌面应用**（Tauri 2 + React）：营销海报、实物图海报、AI 修图、证件照、角色三视图、定妆照、道具库，一个安装包全搞定。
+**纯单机 AI 生图应用**（Tauri 2 + React，支持 Windows / macOS / Android）：营销海报、实物图海报、AI 修图、证件照、角色三视图、定妆照、道具库，一个安装包全搞定。
 没有后端、没有账号、没有数据库服务——除了调用你配置的 OpenAI 兼容生图接口之外，一切都在本机完成。
 
 ## 效果展示
@@ -20,6 +20,12 @@
 | 果饮招商 · 高科技感 | 产品海报 · 简约高级 |
 | --- | --- |
 | ![果饮招商海报](docs/examples/poster-juice.jpg) | ![拖鞋产品海报](docs/examples/poster-slippers.jpg) |
+
+**证件照**（ImageUltra 实测生成：左=AI 生成的虚拟人像原图，右=一键换蓝底 + 本地精确裁切到一寸 295×413 像素；人物为 AI 虚拟形象，非真人）：
+
+| 原图（AI 生成虚拟人像） | 一寸蓝底成品 295×413 |
+| --- | --- |
+| <img src="docs/examples/idphoto-source.jpg" alt="虚拟人像原图" width="295"> | <img src="docs/examples/idphoto-one-inch.png" alt="一寸蓝底证件照" width="295"> |
 
 **三视图**（正/侧/背同一角色、装束配件一件不漏，1961 美影厂工笔重彩画风）：
 
@@ -101,15 +107,30 @@ npm run tauri:build
 
 产物：`src-tauri/target/release/bundle/nsis/ImageUltra_0.1.0_x64-setup.exe`。
 
-### GitHub Actions 一键出 exe + dmg
+### Android（.apk）
+
+需要 Java 17 与 Android SDK + NDK 27（装 Android Studio 即可全有），加上 Rust 安卓目标：
+
+```bash
+rustup target add aarch64-linux-android armv7-linux-androideabi i686-linux-android x86_64-linux-android
+```
+
+```bash
+export ANDROID_HOME="$HOME/Library/Android/sdk" && export NDK_HOME="$ANDROID_HOME/ndk/27.0.12077973" && npx tauri android build --apk
+```
+
+产物：`src-tauri/gen/android/app/build/outputs/apk/universal/release/app-universal-release.apk`。
+当前 release 构建使用 debug 签名以保证可直接安装（安装时允许"未知来源"即可）；正式分发请自行配置 keystore。
+
+### GitHub Actions 一键出 exe + dmg + apk
 
 仓库已带 `.github/workflows/release.yml`：
 
-- 推送 tag（如 `v0.1.0`）→ 自动构建 **Windows NSIS exe + macOS 通用 dmg**，并创建 Release 草稿；
+- 推送 tag（如 `v0.1.1`）→ 自动构建 **Windows NSIS exe + macOS 通用 dmg + Android universal apk**，并创建 Release 草稿（APK 自动附加）；
 - 或在 Actions 页面手动 Run workflow → 构建产物挂在 Artifacts 里。
 
 ```bash
-git tag v0.1.0 && git push origin v0.1.0
+git tag v0.1.1 && git push origin v0.1.1
 ```
 
 ## 技术说明

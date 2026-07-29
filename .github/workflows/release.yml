@@ -58,3 +58,64 @@ jobs:
             src-tauri/target/**/bundle/nsis/*.exe
             src-tauri/target/**/bundle/dmg/*.dmg
           if-no-files-found: warn
+
+  # Android：产出 universal APK（当前用 debug 签名保证可直装）
+  build-android:
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install NDK
+        run: sdkmanager "ndk;27.0.12077973"
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: aarch64-linux-android,armv7-linux-androideabi,i686-linux-android,x86_64-linux-android
+
+      - uses: swatinem/rust-cache@v2
+        with:
+          workspaces: './src-tauri -> target'
+
+      - name: Install frontend dependencies
+        run: npm ci
+
+      - name: Build APK (universal)
+        run: |
+          export NDK_HOME="$ANDROID_HOME/ndk/27.0.12077973"
+          npx tauri android build --apk
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: bundles-android
+          path: src-tauri/gen/android/app/build/outputs/apk/**/release/*.apk
+          if-no-files-found: error
+
+      # 打 tag 时把 APK 挂到对应 Release（等桌面 job 先建出草稿，带重试）
+      - name: Upload APK to release
+        if: startsWith(github.ref, 'refs/tags/')
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          APK=$(find src-tauri/gen/android/app/build/outputs/apk -path '*release*' -name '*.apk' | head -1)
+          NAME="ImageUltra_${GITHUB_REF_NAME#v}_universal.apk"
+          cp "$APK" "$NAME"
+          for i in $(seq 1 30); do
+            gh release upload "$GITHUB_REF_NAME" "$NAME" --clobber && exit 0
+            echo "release not ready, retry $i"
+            sleep 60
+          done
+          exit 1

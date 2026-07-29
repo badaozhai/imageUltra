@@ -1,6 +1,6 @@
 [package]
 name = "imageultra_desktop"
-version = "0.1.0"
+version = "0.1.1"
 description = "ImageUltra standalone AI image generation studio"
 authors = ["imageultra"]
 edition = "2021"
